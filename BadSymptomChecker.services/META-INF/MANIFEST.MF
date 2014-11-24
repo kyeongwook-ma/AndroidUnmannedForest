@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Services
+Bundle-SymbolicName: BadSymptomChecker.services
+Bundle-Version: 1.0.0.qualifier
+Export-Package: badsymptomchecker.services
+Require-Bundle: ParameterObjects
+Import-Package: org.osgi.framework;version="1.3.0"

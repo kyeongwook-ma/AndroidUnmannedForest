@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Service
+Bundle-SymbolicName: Environments.service
+Bundle-Version: 1.0.0.qualifier
+Export-Package: environments.service
+Import-Package: org.osgi.framework

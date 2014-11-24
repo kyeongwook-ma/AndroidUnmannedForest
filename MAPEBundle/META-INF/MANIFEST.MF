@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: MAPEBundle
+Bundle-SymbolicName: MAPEBundle
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: mapebundle.Activator
+Export-Package: mapebundle;uses:="org.osgi.framework",
+ mapebundle.cfgctlr,
+ mapebundle.ctxmonitor
+Import-Package: 
+ badsymptomchecker.services,
+ org.osgi.framework;version="1.3.0",
+ org.osgi.util.tracker;version="1.5.1",
+ parameterobjects.objectclass,
+ usabilityimprover.service,
+ userbehaviormodelgenerator.service,
+ hostactivator
+Require-Bundle: mapebundle.services;bundle-version="1.0.0"

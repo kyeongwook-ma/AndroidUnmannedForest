@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Service
+Bundle-SymbolicName: UsabilityImprover.service
+Bundle-Version: 1.0.0.qualifier
+Import-Package: org.osgi.framework;version="1.7.0",
+ parameterobjects.objectclass
+Export-Package: usabilityimprover.service

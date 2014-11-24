@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Services
+Bundle-SymbolicName: mapebundle.services
+Bundle-Version: 1.0.0.qualifier
+Export-Package: mapebundle.services
+Require-Bundle: ParameterObjects;bundle-version="1.0.0"
+Import-Package: org.osgi.framework

@@ -1,0 +1,9 @@
+0	0	Field	Cloudy	10	N	5	Low
+0	1	Field	Cloudy	8	N	8	High
+0	2	Mountain	Rainy	7	N	15	Low
+1	0	Field	Cloudy	11	N	5	Low
+1	1	Lake	Cloudy	4	N	18	Medium
+1	2	Mountain	Rainy	3	N	21	Medium
+2	0	River	Sunny	13	N	13	Low
+2	1	River	Sunny	16	N	16	Medium
+2	2	Field	Cloudy	11	N	11	High

@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Agents
+Bundle-SymbolicName: Agents
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: agents.Activator
+Import-Package: agents.service,
+ org.osgi.framework;version="1.3.0"
+Bundle-ActivationPolicy: lazy
+Export-Package: agents,
+ agents.variable
+Bundle-ClassPath: .

@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ParameterObjects
+Bundle-SymbolicName: ParameterObjects
+Bundle-Version: 1.0.0.qualifier
+Export-Package: parameterobjects.objectclass
+Import-Package: org.osgi.framework

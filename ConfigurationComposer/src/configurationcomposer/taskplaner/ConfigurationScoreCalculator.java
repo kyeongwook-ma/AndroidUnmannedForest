@@ -2,6 +2,14 @@ package configurationcomposer.taskplaner;
 
 import hostactivator.HostActivator;
 
+
+
+
+
+
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 //import java.lang.reflect.InvocationTargetException;
 //import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -9,6 +17,12 @@ import java.util.ArrayList;
 //import java.util.Iterator;
 ////import java.util.List;
 //import java.util.Vector;
+
+
+
+
+
+
 
 //import org.paukov.combinatorics.Factory;
 //import org.paukov.combinatorics.Generator;
@@ -117,7 +131,74 @@ public class ConfigurationScoreCalculator {
 		}// end of for
 		System.out.println("getOptimalConfiguration finish");
 		System.err.println("getOptimalConfiguration finish");
-		System.out.println(optList.toString());
+		
+		
+		//draw Agents
+		Object drawUI = HostActivator.getService("DrawService");
+//		drawAgents(Integer cellNum,String agentID,String agentType)
+		
+		Class[] paramClassSelecetedText = {String.class,String.class};
+		
+		String[] optListNames = new String[9];
+		
+		for(int i=0;i<9;i++)
+			optListNames[i] = ((BaseAgent)optList.get(i)).getAgentID();
+		
+		Object[] paramSelecetedText = {optListNames,String.valueOf(curScore)};
+		
+		Class[] paramClassDrawAgents = {Integer.class,String.class,String.class};
+		
+		Integer cellNum = new Integer(0);
+		
+		try {
+			Method drawSelectedText = drawUI.getClass().getDeclaredMethod("drawSelected", paramClassSelecetedText);
+			try {
+				drawSelectedText.invoke(drawUI, paramSelecetedText);
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalArgumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InvocationTargetException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			Method drawAgents = drawUI.getClass().getDeclaredMethod("drawAgents", paramClassDrawAgents);
+			
+			for(int i=0;i<9;i++)
+			{
+				Object[] paramDrawAgents = {new Integer(i),((BaseAgent) (curList.get(i))).getAgentID(),((BaseAgent) (curList.get(i))).getAgentType()};
+				try {
+					drawAgents.invoke(drawUI, paramDrawAgents);
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalArgumentException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (InvocationTargetException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
 
 		return optList;
 		

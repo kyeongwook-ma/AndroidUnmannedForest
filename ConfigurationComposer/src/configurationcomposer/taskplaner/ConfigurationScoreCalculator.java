@@ -95,8 +95,8 @@ public class ConfigurationScoreCalculator {
 	
 	
 	public ArrayList getOptimalConfiguration(){
-		System.out.println("getOptimalConfiguration start");	
-		System.err.println("getOptimalConfiguration start");
+//		System.out.println("getOptimalConfiguration start");	
+//		System.err.println("getOptimalConfiguration start");
 	
 		optScore = 0;
 		prevScore = 0;
@@ -114,7 +114,7 @@ public class ConfigurationScoreCalculator {
 		for (int i = 0; i < 181440; i++) {
 			if (this.placementTest(curList)) {
 				curScore = this.getScoreValueFromMatrix(curList);
-				System.out.println(curScore);
+//				System.out.println(curScore);
 				if (prevScore < curScore) {
 					for (int j = 0; j < curList.size(); j++) {
 						optList.set(j, curList.get(j));
@@ -208,8 +208,8 @@ public class ConfigurationScoreCalculator {
 	}
 	
 	public ArrayList next_permutation(ArrayList staticList) {
-		System.out.println("next_permutation start");
-		System.err.println("next_permutation start");
+//		System.out.println("next_permutation start");
+//		System.err.println("next_permutation start");
 		int i = 0, j = 0;
 		curList = staticList;
 
@@ -233,8 +233,8 @@ public class ConfigurationScoreCalculator {
 		for (j = curList.size() - 1; j > i; i++, j--) {
 			swap(curList, i, j);
 		}
-		System.out.println("next_permutation stop");
-		System.err.println("next_permutation stop");
+//		System.out.println("next_permutation stop");
+//		System.err.println("next_permutation stop");
 		return curList;
 	}
 
@@ -275,6 +275,10 @@ public class ConfigurationScoreCalculator {
 
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 11; j++) {
+				
+				System.out.println("fuel :"+((BaseAgent) agentList.get(j)).getFuelCost());
+				System.out.println("Deprecation :"+((BaseAgent) agentList.get(j)).getDeprecationCost());
+				System.out.println("DeviceDeprecation :"+((BaseAgent) agentList.get(j)).getSumOfDeviceDeprecation());
 				cost = (((BaseAgent) agentList.get(j)).getFuelCost() * 0.3)
 						+ (((BaseAgent) agentList.get(j)).getDeprecationCost() * 0.3)
 						+ (((BaseAgent) agentList.get(j)).getSumOfDeviceDeprecation() * 0.1);
@@ -308,9 +312,21 @@ public class ConfigurationScoreCalculator {
 		ArrayList agentList = iniList;
 		ArrayList cellList = this.cellList;
 
+		
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 11; j++) {
+				
 				correctness = (((BaseAgent) agentList.get(j)).getAvgOfSensor() * 0.3);
+				System.out.println("AvgOfSensor : " + ((BaseAgent) agentList.get(j)).getAvgOfSensor());
+				System.out.println("MountainRainMoving : " + ((BaseAgent) agentList.get(j))
+						.getMountainRainMovingDistance());
+				System.out.println("MountainMoving : " + ((BaseAgent) agentList.get(j))
+						.getMountainMovingDistance());
+				System.out.println("RainMoving : " + ((BaseAgent) agentList.get(j))
+						.getRainMovingDistance());
+				System.out.println("NomalMoving : " + ((BaseAgent) agentList.get(j))
+						.getNormalMovingDistance());
+
 				if (((ForestCell) cellList.get(i)).getFeatureList()
 						.contains("Mountain")) {
 

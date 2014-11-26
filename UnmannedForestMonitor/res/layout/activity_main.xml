@@ -460,7 +460,7 @@
     <TextView 
         android:layout_height="18dp"
         android:layout_width="match_parent"
-        android:textSize="25dp"
+        android:textSize="20dp"
         android:id="@+id/selected_score"
         android:background="@android:color/background_dark"
         android:textColor = "@android:color/white"/>

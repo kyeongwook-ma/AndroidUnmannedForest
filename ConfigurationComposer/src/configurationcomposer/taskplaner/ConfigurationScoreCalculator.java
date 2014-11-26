@@ -114,7 +114,7 @@ public class ConfigurationScoreCalculator {
 		for (int i = 0; i < 181440; i++) {
 			if (this.placementTest(curList)) {
 				curScore = this.getScoreValueFromMatrix(curList);
-				// System.out.println(curScore);
+				System.out.println(curScore);
 				if (prevScore < curScore) {
 					for (int j = 0; j < curList.size(); j++) {
 						optList.set(j, curList.get(j));
@@ -132,19 +132,22 @@ public class ConfigurationScoreCalculator {
 		System.out.println("getOptimalConfiguration finish");
 		System.err.println("getOptimalConfiguration finish");
 		
+		System.out.println(optScore);
+
+		
 		
 		//draw Agents
-		Object drawUI = HostActivator.getService("DrawService");
+		Object drawUI = HostActivator.getService("selab.dev.unmannedforestmonitor.uiservice.DrawService");
 //		drawAgents(Integer cellNum,String agentID,String agentType)
 		
 		Class[] paramClassSelecetedText = {String.class,String.class};
 		
-		String[] optListNames = new String[9];
+		ArrayList optListNames = new ArrayList();
 		
 		for(int i=0;i<9;i++)
-			optListNames[i] = ((BaseAgent)optList.get(i)).getAgentID();
+			optListNames.add(((BaseAgent)curList.get(i)).getAgentID());
 		
-		Object[] paramSelecetedText = {optListNames,String.valueOf(curScore)};
+		Object[] paramSelecetedText = {optListNames.toString(),String.valueOf(optScore)};
 		
 		Class[] paramClassDrawAgents = {Integer.class,String.class,String.class};
 		

@@ -4,6 +4,7 @@ import selab.dev.unmannedforestmonitor.osgi.BundleController;
 import kr.ac.sogang.unmannedforestmonitor.R;
 import android.app.Activity;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -123,11 +124,12 @@ public class MainActivity extends Activity {
 		setCellPanel();
 		//ChangeEvn 버튼 연결
 		
-		final BundleController bundleController= new BundleController(getFilesDir().getAbsolutePath(), getResources(), null);
+		final BundleController bundleController= new BundleController(this,getFilesDir().getAbsolutePath(), getResources(), null);
 		
 		changeEvn = (Button)findViewById(R.id.change_evn);
 		
-
+		final MAPEThread mapeThread = new MAPEThread(bundleController);
+//		final Thread runMape = new Thread(mapeThread);
 		changeEvn.setOnClickListener(new OnClickListener() {
 
 
@@ -136,7 +138,8 @@ public class MainActivity extends Activity {
 				// TODO Auto-generated method stub
 				
 				try {
-					bundleController.installAndStartBundle(R.raw.mapebundle, "mapebundle");
+					MAPEAsync mapeAsync = new MAPEAsync();
+					mapeAsync.execute(bundleController);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -161,6 +164,39 @@ public class MainActivity extends Activity {
 		CellPanels.cellPanels = cellpanels;
 
 	}
+	class MAPEThread implements Runnable
+	{
+		BundleController bundleController;
+		public MAPEThread(BundleController bundleController) {
+			// TODO Auto-generated constructor stub
+			this.bundleController = bundleController;
+		
+		}
+		
+		@Override
+		public void run() {
+			Class[] classes = {};
+			Object[] objects = {};
+			bundleController.startServiceMethod("mapebundle", "mapebundle.ctxmonitor.ContextMonitor", "activate", classes, objects);
+		}
 
+	}
+	private class MAPEAsync extends AsyncTask<BundleController, Void, Void>
+	{
 
+		@Override
+		protected Void doInBackground(BundleController... params) {
+			// TODO Auto-generated method stub
+			try {
+				params[0].installAndStartBundle(R.raw.mapebundle, "mapebundle");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return null;
+		}
+
+	
+	}
 }

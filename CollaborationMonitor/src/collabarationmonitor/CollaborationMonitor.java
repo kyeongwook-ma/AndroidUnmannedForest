@@ -13,9 +13,9 @@ public class CollaborationMonitor implements UBMGeneratorService{
 		CalculateCurrentScore calculateCurrentScore = new CalculateCurrentScore();
 		double currentScore = calculateCurrentScore.getScore();
 		
-		if(currentScore < 0.46)
+//		if(currentScore < 0.46)
 			return new ArrayList();
-		return null;
+//		return null;
 	}
 
 	

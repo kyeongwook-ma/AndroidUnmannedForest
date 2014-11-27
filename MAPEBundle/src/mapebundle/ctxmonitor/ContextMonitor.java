@@ -25,34 +25,9 @@ public class ContextMonitor implements IContextMonitor {
 
 	public ContextMonitor() {
 
-		activate();
+//		activate();
 
-		System.out.println("before running");
-
-		//new Thread() {
-		//	public void run() {
-
-		List currModel;
-
-		String designedModel = null;
-
-		UBMGeneratorService ubmGenerator = 
-				(UBMGeneratorService) HostActivator
-				.getService(UBMGeneratorService.class.getName());
-
-		// while(isRunning) {
-		currModel = ubmGenerator.genCurBM("/data/");
-
-		if(currModel != null) {
-			/* metaData -> designModel : SharedPrefs */
-			AdaptationReasoner.getInstance().reason(designedModel, currModel);
-		}
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		System.out.println("ContextMonitor: start");
+		
 		// }
 
 		//	};
@@ -84,6 +59,32 @@ public class ContextMonitor implements IContextMonitor {
 
 	public void activate() {
 		isRunning = true;
+		System.out.println("before running");
+
+		//new Thread() {
+		//	public void run() {
+
+		List currModel;
+
+		String designedModel = null;
+
+		UBMGeneratorService ubmGenerator = 
+				(UBMGeneratorService) HostActivator
+				.getService(UBMGeneratorService.class.getName());
+
+		// while(isRunning) {
+		currModel = ubmGenerator.genCurBM("/data/");
+
+		if(currModel != null) {
+			/* metaData -> designModel : SharedPrefs */
+			AdaptationReasoner.getInstance().reason(designedModel, currModel);
+		}
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		System.out.println("ContextMonitor: start");
 	}
 
 	public void deActivate() {

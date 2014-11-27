@@ -19,6 +19,7 @@ import org.osgi.framework.ServiceReference;
 
 import selab.dev.unmannedforestmonitor.uiservice.DrawService;
 import selab.dev.unmannedforestmonitor.uiservice.DrawUI;
+import android.app.Activity;
 import android.content.res.Resources;
 import android.util.Log;
 
@@ -34,7 +35,7 @@ public class BundleController {
 	private Properties felixProperties;
 	private Felix felix;
 	
-	public BundleController(String absolutePath,Resources res, Object effectorParam) {
+	public BundleController(Activity androidContext,String absolutePath,Resources res, Object effectorParam) {
 		this.absolutePath = absolutePath;
 		this.res = res;
 		
@@ -43,7 +44,7 @@ public class BundleController {
 
 		//fliex 占십깍옙화 context 占쏙옙占쏙옙 
 		makeFelix();
-		getFelix().getBundleContext().registerService(DrawService.class.getName(),new DrawUI(), null);
+		getFelix().getBundleContext().registerService(DrawService.class.getName(),new DrawUI(androidContext), null);
 		
 		
 		/*
@@ -88,6 +89,8 @@ public class BundleController {
 			installAndStartBundle(R.raw.configurationcomposer, "configurationcomposer");
 			installAndStartBundle(R.raw.nulladaptreasoner, "nulladaptreasonser");
 			installAndStartBundle(R.raw.collaborationmonitor, "collaborationmonitor");
+			
+			installAndStartBundle(R.raw.mapebundle, "mapebundle");
 			
 			
 			

@@ -42,7 +42,7 @@ public class ConfigurationScoreCalculator {
 //	private HashMap minScoreSet = new HashMap();
 //	private Vector threadList = new Vector();
 //	private int Threadcount;
-	private static int cellSize;
+	private static int cellSize = 9;
 	private ArrayList iniList;
 	private ArrayList curList;
 	private ArrayList optList;
@@ -95,8 +95,8 @@ public class ConfigurationScoreCalculator {
 	
 	
 	public ArrayList getOptimalConfiguration(){
-//		System.out.println("getOptimalConfiguration start");	
-//		System.err.println("getOptimalConfiguration start");
+		System.out.println("getOptimalConfiguration start");	
+		System.err.println("getOptimalConfiguration start");
 	
 		optScore = 0;
 		prevScore = 0;
@@ -105,7 +105,6 @@ public class ConfigurationScoreCalculator {
 		this.benefitMatrix = this.makeBenefitMatrix();
 		this.scoreMatrix = this.makeScoreMatrix(costMatrix, benefitMatrix);
 
-		cellSize = cellList.size();
 		for (int i = 0; i < iniList.size(); i++) {
 			curList.set(i, iniList.get(i));
 			optList.add(iniList.get(i));
@@ -208,8 +207,8 @@ public class ConfigurationScoreCalculator {
 	}
 	
 	public ArrayList next_permutation(ArrayList staticList) {
-//		System.out.println("next_permutation start");
-//		System.err.println("next_permutation start");
+		System.out.println("next_permutation start");
+		System.err.println("next_permutation start");
 		int i = 0, j = 0;
 		curList = staticList;
 
@@ -233,8 +232,8 @@ public class ConfigurationScoreCalculator {
 		for (j = curList.size() - 1; j > i; i++, j--) {
 			swap(curList, i, j);
 		}
-//		System.out.println("next_permutation stop");
-//		System.err.println("next_permutation stop");
+		System.out.println("next_permutation stop");
+		System.err.println("next_permutation stop");
 		return curList;
 	}
 

@@ -24,6 +24,7 @@ public class MainActivity extends Activity {
 	ImageView densitys[];
 	TextView agentNames[];
 	CellPanel cellpanels[];
+	static boolean startBundle = false;
 
 
 	protected void onCreate(Bundle savedInstanceState) {
@@ -128,17 +129,16 @@ public class MainActivity extends Activity {
 		
 		changeEvn = (Button)findViewById(R.id.change_evn);
 		
-		final MAPEThread mapeThread = new MAPEThread(bundleController);
+
 //		final Thread runMape = new Thread(mapeThread);
 		changeEvn.setOnClickListener(new OnClickListener() {
 
-
+			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
+				MAPEAsync mapeAsync = new MAPEAsync();
 				try {
-					MAPEAsync mapeAsync = new MAPEAsync();
 					mapeAsync.execute(bundleController);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -164,36 +164,43 @@ public class MainActivity extends Activity {
 		CellPanels.cellPanels = cellpanels;
 
 	}
-	class MAPEThread implements Runnable
-	{
-		BundleController bundleController;
-		public MAPEThread(BundleController bundleController) {
-			// TODO Auto-generated constructor stub
-			this.bundleController = bundleController;
-		
-		}
-		
-		@Override
-		public void run() {
-			Class[] classes = {};
-			Object[] objects = {};
-			bundleController.startServiceMethod("mapebundle", "mapebundle.ctxmonitor.ContextMonitor", "activate", classes, objects);
-		}
-
-	}
 	private class MAPEAsync extends AsyncTask<BundleController, Void, Void>
 	{
+
 
 		@Override
 		protected Void doInBackground(BundleController... params) {
 			// TODO Auto-generated method stub
-			try {
-				params[0].installAndStartBundle(R.raw.mapebundle, "mapebundle");
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			if(MainActivity.startBundle == true)
+			{
+				Class[] classes = {};
+				Object[] objects = {};
+				
+				params[0].startServiceMethod("environments", "environments.EnvironmentsServiceImp","changeRandomEnvironment", classes, objects);
+				
+				params[0].deactiveBundle("mapebundle");
+				
+				try {
+					params[0].installAndStartBundle(R.raw.mapebundle, "mapebundle");
+					
+					MainActivity.startBundle = true;
+					
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
-			
+			else{
+				try {
+					params[0].installAndStartBundle(R.raw.mapebundle, "mapebundle");
+					
+					MainActivity.startBundle = true;
+					
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 			return null;
 		}
 

@@ -22,7 +22,7 @@ public class DrawUI implements DrawService {
 	}
 
 	@Override
-	public void drawEnvironments(final Integer panelNum, final Object forestCell) {
+	public synchronized void drawEnvironments(final Integer panelNum, final Object forestCell) {
 		// TODO Auto-generated method stub
 		androidContext.runOnUiThread(new Runnable() {
 			

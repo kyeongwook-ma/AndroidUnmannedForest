@@ -62,6 +62,7 @@ public class BundleController {
 
 	private void installBundles()  {
 		
+		
 		try {
 			installAndStartBundle(R.raw.hostactivator,"hostactivator");
 			
@@ -90,7 +91,6 @@ public class BundleController {
 			installAndStartBundle(R.raw.nulladaptreasoner, "nulladaptreasonser");
 			installAndStartBundle(R.raw.collaborationmonitor, "collaborationmonitor");
 			
-			installAndStartBundle(R.raw.mapebundle, "mapebundle");
 			
 			
 			
@@ -129,6 +129,16 @@ public class BundleController {
 		
 		bundle.start();
 		Log.i(bundleName,Integer.toString(bundle.getState()));
+	}
+	public synchronized void deactiveBundle(String bundleName)
+	{
+		Bundle bundle = getFelix().getBundleContext().getBundle(absolutePath+"felix/bundle/" + bundleName + ".jar");
+		try {
+			bundle.uninstall();
+		} catch (BundleException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private void makeFelix() {
